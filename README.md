@@ -46,7 +46,7 @@ curl localhost:3001/api/food?q=mcflurry
 Now that we understand how this endpoint works, let's build the front-end application. Kill the server with CTRL+C.
 
 
-# Frontend Setup
+# Frontend Client Setup
 
 Ensure that you have create-react-app installed globally:
 
@@ -174,3 +174,62 @@ This will be our start command. Let's add the start and client commands to our p
 ```
 
 For start, we execute both commands, escaping the quotes because we're in a JSON file. For client, we execute the start-client.js script with node. Now we can boot both servers by running **npm start**.
+
+
+## React Interface
+
+Now we will add the food lookup React components which will make requests against our API server. The components are located in the **/client/src** folder. You can copy them over the auto-generated content by create-react-app, overwriting the original *App.js*, *index.js* and *index.css* files.
+
+We use Semantic UI for styling the app - the files can be found in **/client/src/semantic** as well as **/client/semantic.json**. It's loaded inside of **/client/src/index.js**. **/client/src/index.css** contains a few margins.
+
+Changing the value of the search bar (the FoodSearch component) ultimately calls search() on Client. **Client.js** contains a Fetch call to our API endpoint:
+
+```
+function search(query, cb) {
+  return fetch(`api/food?q=${query}`, {
+    accept: "application/json"
+  })
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+```
+
+This is the one touch point between our React web app and the API server. Notice how the URL *does not include* the base **localhost:3001**. That's because, as noted earlier, we want this request to be made to the Webpack development server. Thanks to the configuration established by create-react-app, the Webpack dev server will infer what traffic to proxy. It will proxy a request if the URL is not recognized or if the request is not loading static assets (like HTML/CSS/JS).
+
+We just need to instruct Webpack to use the proxy.
+
+
+## Setting up the proxy
+
+To have the Webpack development server proxy our API requests to our API server, we just need to add the following line to client/package.json:
+
+```
+// Inside client/package.json
+"proxy": "http://localhost:3001/",
+```
+
+
+# Test your App
+
+Our React app is ready and in place in client/. We have concurrently setup to boot both our Webpack dev server and our API server together. And we've specified the route that Webpack should proxy API traffic to.
+
+Let's boot both servers:
+
+```
+npm start
+```
+
+![](./usage-demo.gif)
+
+
+# Deployment
+
+create-react-app comes with a build command that you can use to create a static bundle of the React app:
+
+```
+cd client
+npm run build
+```
+
+This produces a build/ folder which you can serve with any static asset host. It contains all your app's HTML, JavaScript, and CSS files.
