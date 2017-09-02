@@ -96,19 +96,17 @@ Taking a look at client/package.json, we can see that we just installed react, r
 
 Inside that directory, we can now run several commands:
 
+> - npm start
+>   - Starts the development server.
 >
-* npm start
-**  Starts the development server.
+> - npm run build
+>   - Bundles the app into static files for production.
 >
-* npm run build
-**  Bundles the app into static files for production.
+> - npm test
+>   - Starts the test runner.
 >
-* npm test
-**  Starts the test runner.
->
-* npm run eject
-**  Removes this tool and copies build dependencies, configuration files
-  and scripts into the app directory. If you do this, you can’t go back!
+> - npm run eject
+>   - Removes this tool and copies build dependencies, configuration files and scripts into the app directory. If you do this, you can’t go back!
 
 
 ### react-scripts
