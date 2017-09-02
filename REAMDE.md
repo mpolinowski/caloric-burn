@@ -52,6 +52,8 @@ In production we will use :
 
 ```
 npm run server
+
+![](./usage-demo.gif)
 ```
 
 Inside `server.js`, we tell Node/Express we'd like it to serve static assets in production:
