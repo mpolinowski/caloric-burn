@@ -110,3 +110,36 @@ Inside that directory, we can now run several commands:
 
 
 ### react-scripts
+
+react-scripts is an NPM package specifically for use with create-react-app. It's the "black box" which contains the essentials:
+
+- Dependencies
+  - Like Babel, ESLint, and Webpack.
+- Configuration
+  - Config files for Webpack, Babel and ESLint, both for development and production.
+- Scripts
+  - For instance, the command react-scripts start runs a script shipped with this package. It's responsible for ultimately booting the Webpack development server.
+
+To see it in action, we can run npm start from inside of this folder:
+
+```
+cd client && npm start
+```
+
+This will launch a Webpack dev server and should also open localhost:3000 in your browser:
+
+![](./boilerplate-page.png)
+
+We have our API server in the top-level directory and we were able to boot that. And we have our client app down here in client and we're able to boot a server for this.
+
+So the user will direct their browser to localhost:3000, hitting the Webpack dev server. But then how will the React app communicate with our API server?
+
+create-react-app provides a mechanism for working with an API server in development. We can have the Webpack development server proxy requests intended for our API server, like this:
+
+![](./flow-diagram.png)
+
+In this flow, React makes an API request to localhost:3000, the Webpack development server. And then the development server simply proxies that request to the API server, negating any CORS issues.
+
+we need to:
+1. launch both the Webpack dev server and the API server in order to run the app locally.
+1. we need to get the Webpack dev server to proxy requests intended for our API server.
