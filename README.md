@@ -143,3 +143,34 @@ In this flow, React makes an API request to localhost:3000, the Webpack developm
 we need to:
 1. launch both the Webpack dev server and the API server in order to run the app locally.
 1. we need to get the Webpack dev server to proxy requests intended for our API server.
+
+
+## Concurrently
+
+[Concurrently](https://github.com/kimmobrunfeldt/concurrently) is a utility for running multiple processes. Taking a look at our package.json file inside the top-level directory will show you that we already installed Concurrently as a dev-dependency earlier.
+
+We want concurrently to execute two commands, one to boot the API server and one to boot the Webpack development server. You boot multiple commands by passing them to concurrently in quotes like this:
+
+```
+concurrently "npm run server" "cd client && npm start"
+```
+
+However, the && operator is not cross-platform (doesn't work on Windows). As such, we've included a start-client.js script with the project. This script will boot the client from the top-level directory in a manner that is cross-platform.
+
+Ultimately, we'll want to boot concurrently like this:
+
+```
+concurrently "npm run server" "npm run client"
+```
+
+This will be our start command. Let's add the start and client commands to our package.json now:
+
+```
+"scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "client": "node start-client.js"
+  },
+```
+
+For start, we execute both commands, escaping the quotes because we're in a JSON file. For client, we execute the start-client.js script with node. Now we can boot both servers by running **npm start**.
