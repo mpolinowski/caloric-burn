@@ -56,7 +56,7 @@ npm install -g create-react-app
 
 ## create-react-app
 
-At the top-level directory of the project we'll create our client app. We want the React app to be in a folder called client, so we'll just use that name in the create-react-app command:
+At the top-level directory of the project we'll create our client app. We want the React app to be in a folder called client, so we'll just use that name in the create-react-app command  (if you are working inside a clone of this repository, please make sure to remove the already existing /client folder first! Don't delete it completely - you will need some of the files later on):
 
 ```
 create-react-app client
@@ -180,7 +180,7 @@ For start, we execute both commands, escaping the quotes because we're in a JSON
 
 Now we will add the food lookup React components which will make requests against our API server. The components are located in the **/client/src** folder. You can copy them over the auto-generated content by create-react-app, overwriting the original *App.js*, *index.js* and *index.css* files.
 
-We use Semantic UI for styling the app - the files can be found in **/client/src/semantic** as well as **/client/semantic.json**. It's loaded inside of **/client/src/index.js**. **/client/src/index.css** contains a few margins.
+We use [Semantic UI](https://semantic-ui.com/introduction/getting-started.html) for styling the app - the files can be found in **/client/src/semantic** as well as **/client/semantic.json** inside this repository - just copy them into your client directory. It's loaded inside of **/client/src/index.js**. **/client/src/index.css** contains a few margins.
 
 Changing the value of the search bar (the FoodSearch component) ultimately calls search() on Client. **Client.js** contains a Fetch call to our API endpoint:
 
@@ -232,4 +232,4 @@ cd client
 npm run build
 ```
 
-This produces a build/ folder which you can serve with any static asset host. It contains all your app's HTML, JavaScript, and CSS files.
+This produces a build/ folder which you can serve with any static asset host. It contains all your app's HTML, JavaScript, and CSS files. This command is intended for production use. It does all kinds of optimization, to create a fast loading static page.
