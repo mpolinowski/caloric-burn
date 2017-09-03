@@ -57,5 +57,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # npm package
-package.json
+package-lock.json
 
